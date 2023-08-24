@@ -25,12 +25,13 @@ const fontFamilyArr = [
   { text: '仿宋', value: '"FangSong","STFangsong"' },
 ]
 
-// const fontFamilyOptions = fontFamilyArr.map(font => {
-//   return {
-//     value: font.value,
-//     text: <span style={{ fontFamily: font.value}}>{font.text}</span> as VNode
-//   }
-// })
+const fontFamilyOptions = fontFamilyArr.map(font => {
+  return {
+    value: font.value,
+    text: <span style={{ fontFamily: font.value}}>{font.text}</span> as VNode
+    // text: h('span', { style: {fontFamily: font.value} }, font.text)
+  }
+})
 
 export const mapPropsToForms: PropsToForms = {
   text: {
@@ -76,7 +77,7 @@ export const mapPropsToForms: PropsToForms = {
     text: '字体',
     options: [
       { value: '', text: '暂无' },
-      ...fontFamilyArr
+      ...fontFamilyOptions
     ]
   },
 };
