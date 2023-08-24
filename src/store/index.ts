@@ -1,6 +1,7 @@
 import { createStore } from 'vuex'
 import templates, { TemplatesProps } from './templates'
 import user, { UserProps } from './user';
+import editor, { EditorProps } from './editor'
 
 /**
  * ts
@@ -11,25 +12,15 @@ import user, { UserProps } from './user';
 export interface GlobalDataProps {
     user: UserProps;
     templates: TemplatesProps;
+    editor: EditorProps;
 }
 
 const store = createStore<GlobalDataProps>({
     modules: {
       user,
       templates,
+      editor,
     }
-    // state: {
-    //     user: {
-    //         isLogin: false,
-    //     },
-    //     templates: listData
-    // },
-    
-    // getters: {
-    //   getTemplateById: (state) => (id: number) => {
-    //     return state.templates.find(t => t.id === id)
-    //   }
-    // }
 });
 
 export default store

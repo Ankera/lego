@@ -9,13 +9,25 @@
 
       <a-layout>
         <a-layout-sider width="300" style="background-color: yellow">
-          <div class="sidebar-container">组件列表</div>
+          <div class="sidebar-container">
+            <components-list :list="defaultTextTemplates" @onItemClick="addItem"/>
+          </div>
         </a-layout-sider>
 
         <a-layout style="padding: 0 24px 24px">
           <a-layout-content class="preview-container">
             <p>画布区域</p>
-            <div class="preview-list" id="canvas-area">222</div>
+            <div class="preview-list" id="canvas-area">
+              <!-- <div v-for="component in components" :key="component.id">
+                {{ component.props.text }}
+              </div> -->
+              <component
+                v-for="component in components"
+                :key="component.id"
+                :is="component.name"
+                v-bind="component.props"
+              />
+            </div>
           </a-layout-content>
         </a-layout>
 
@@ -30,6 +42,40 @@
     </a-layout>
   </div>
 </template>
+
+<script lang="ts">
+import { defineComponent, computed } from "vue";
+import { useStore } from "vuex";
+import { GlobalDataProps } from "../store/index";
+import { ComponentData } from "../store/editor";
+import ComponentsList from '../components/ComponentsList.vue'
+import LText from "../components/LText.vue";
+import defaultTextTemplates  from '../defaultTemplates'
+
+export default defineComponent({
+  name: "editor",
+  components: {
+    LText,
+    ComponentsList
+  },
+  setup() {
+    const store = useStore<GlobalDataProps>();
+    const components = computed<ComponentData[]>(
+      () => store.state.editor.components
+    );
+
+    const addItem = (props: any) => {
+      store.commit('addComponent', props)
+    }
+
+    return {
+      components,
+      defaultTextTemplates,
+      addItem
+    };
+  },
+});
+</script>
 
 <style>
 .page-title {
