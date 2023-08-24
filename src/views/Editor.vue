@@ -10,7 +10,10 @@
       <a-layout>
         <a-layout-sider width="300" style="background-color: yellow">
           <div class="sidebar-container">
-            <components-list :list="defaultTextTemplates" @onItemClick="addItem"/>
+            <components-list
+              :list="defaultTextTemplates"
+              @onItemClick="addItem"
+            />
           </div>
         </a-layout-sider>
 
@@ -21,12 +24,15 @@
               <!-- <div v-for="component in components" :key="component.id">
                 {{ component.props.text }}
               </div> -->
-              <component
+              <EditWrapper
                 v-for="component in components"
                 :key="component.id"
-                :is="component.name"
-                v-bind="component.props"
-              />
+                :id="component.id"
+                :active="component.id === (currentElement && currentElement.id)"
+                @setActive="setActive"
+              >
+                <component :is="component.name" v-bind="component.props" />
+              </EditWrapper>
             </div>
           </a-layout-content>
         </a-layout>
@@ -37,6 +43,12 @@
           class="settings-panel"
         >
           组件属性
+          <props-table
+            v-if="currentElement && currentElement.props"
+            :props="currentElement.props"
+            @change="handleChange"
+          ></props-table>
+          <pre>{{ currentElement && currentElement.props }}</pre>
         </a-layout-sider>
       </a-layout>
     </a-layout>
@@ -48,30 +60,48 @@ import { defineComponent, computed } from "vue";
 import { useStore } from "vuex";
 import { GlobalDataProps } from "../store/index";
 import { ComponentData } from "../store/editor";
-import ComponentsList from '../components/ComponentsList.vue'
+import ComponentsList from "../components/ComponentsList.vue";
+import EditWrapper from "../components/EditWrapper.vue";
+import PropsTable from "../components/PropsTable.vue";
 import LText from "../components/LText.vue";
-import defaultTextTemplates  from '../defaultTemplates'
+import defaultTextTemplates from "../defaultTemplates";
 
 export default defineComponent({
   name: "editor",
   components: {
     LText,
-    ComponentsList
+    ComponentsList,
+    EditWrapper,
+    PropsTable,
   },
   setup() {
     const store = useStore<GlobalDataProps>();
     const components = computed<ComponentData[]>(
       () => store.state.editor.components
     );
+    const currentElement = computed<ComponentData | null>(
+      () => store.getters.getCurrentElement
+    );
 
     const addItem = (props: any) => {
-      store.commit('addComponent', props)
+      store.commit("addComponent", props);
+    };
+
+    const setActive = (props: any) => {
+      store.commit("setActive", props);
+    };
+
+    const handleChange = (e: any) => {
+      store.commit('updateComponent', e);
     }
 
     return {
       components,
       defaultTextTemplates,
-      addItem
+      addItem,
+      setActive,
+      currentElement,
+      handleChange
     };
   },
 });
