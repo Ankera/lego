@@ -31,6 +31,7 @@
 import { defineComponent, PropType, computed, VNode } from "vue";
 import { reduce } from "lodash-es";
 import RenderVnode from './RenderVnode'
+import ColorPicker from './ColorPicker.vue'
 import { TextComponentProps } from "../defaultProps";
 import { mapPropsToForms } from "../PropsMap";
 
@@ -55,6 +56,7 @@ export default defineComponent({
     },
   },
   components: {
+    ColorPicker,
     RenderVnode
   },
   emits: ["change"],

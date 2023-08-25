@@ -1,4 +1,5 @@
 <template>
+  <uploader action="/utils/upload-img" />
   <div class="homepage-container">
     <a-layout :style="{ backgroundColor: '#fff' }">
       <a-layout-header class="header">
@@ -9,7 +10,7 @@
       </a-layout-header>
 
       <a-layout-content class="home-layout">
-       <router-view></router-view>
+        <router-view></router-view>
       </a-layout-content>
 
       <a-layout-footer>
@@ -21,22 +22,24 @@
 
 <script lang="ts">
 import { defineComponent, computed } from "vue";
-import UserProfile from '../components/UserProfile.vue'
-import { useStore } from 'vuex'
-import {  GlobalDataProps} from '../store/index'
+import UserProfile from "../components/UserProfile.vue";
+import { useStore } from "vuex";
+import { GlobalDataProps } from "../store/index";
+import Uploader from "../components/Uploader.vue";
 
 export default defineComponent({
   name: "APP",
   components: {
-    UserProfile
+    UserProfile,
+    Uploader,
   },
-  setup(){
-    const store = useStore<GlobalDataProps>()
-    const user = computed(() => store.state.user)
+  setup() {
+    const store = useStore<GlobalDataProps>();
+    const user = computed(() => store.state.user);
     return {
-      user
-    }
-  }
+      user,
+    };
+  },
 });
 </script>
 
@@ -65,4 +68,3 @@ export default defineComponent({
   width: 100%;
 }
 </style>
-
