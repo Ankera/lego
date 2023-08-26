@@ -1,5 +1,7 @@
 <template>
-  <uploader action="/utils/upload-img" />
+  <uploader action="/utils/upload-img" drag >
+    <h1>上传图片</h1>
+  </uploader>
   <div class="homepage-container">
     <a-layout :style="{ backgroundColor: '#fff' }">
       <a-layout-header class="header">
