@@ -1,7 +1,7 @@
 <template>
-  <uploader action="/utils/upload-img" drag >
+  <!-- <uploader action="/utils/upload-img" drag listType="picture" >
     <h1>上传图片</h1>
-  </uploader>
+  </uploader> -->
   <div class="homepage-container">
     <a-layout :style="{ backgroundColor: '#fff' }">
       <a-layout-header class="header">
@@ -27,13 +27,13 @@ import { defineComponent, computed } from "vue";
 import UserProfile from "../components/UserProfile.vue";
 import { useStore } from "vuex";
 import { GlobalDataProps } from "../store/index";
-import Uploader from "../components/Uploader.vue";
+// import Uploader from "../components/Uploader.vue";
 
 export default defineComponent({
   name: "APP",
   components: {
     UserProfile,
-    Uploader,
+    // Uploader,
   },
   setup() {
     const store = useStore<GlobalDataProps>();

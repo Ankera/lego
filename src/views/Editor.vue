@@ -64,12 +64,14 @@ import ComponentsList from "../components/ComponentsList.vue";
 import EditWrapper from "../components/EditWrapper.vue";
 import PropsTable from "../components/PropsTable.vue";
 import LText from "../components/LText.vue";
+import LImage from "../components/LImage.vue";
 import defaultTextTemplates from "../defaultTemplates";
 
 export default defineComponent({
   name: "editor",
   components: {
     LText,
+    LImage,
     ComponentsList,
     EditWrapper,
     PropsTable,
@@ -83,8 +85,11 @@ export default defineComponent({
       () => store.getters.getCurrentElement
     );
 
-    const addItem = (props: any) => {
-      store.commit("addComponent", props);
+    // const addItem = (props: any) => {
+    //   store.commit("addComponent", props);
+    // };
+    const addItem = (component: any) => {
+      store.commit("addComponent", component);
     };
 
     const setActive = (props: any) => {

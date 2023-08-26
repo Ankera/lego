@@ -169,6 +169,9 @@ export default defineComponent({
       });
       if (props.listType === "picture") {
         try {
+            /**
+             * 返回图片地址
+             * */
           fileObj.url = URL.createObjectURL(uploadedFile);
         } catch (err) {
           console.error("upload File error", err);
@@ -331,21 +334,23 @@ export default defineComponent({
   display: block;
 }
 
-.upload-area {
-  background-color: #efefef;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  cursor: pointer;
-  padding: 20px;
-  width: 360px;
-  height: 180px;
-  text-align: center;
+</style>
+
+
+<!-- .upload-area {
+background-color: #efefef;
+border: 1px solid #ccc;
+border-radius: 4px;
+cursor: pointer;
+padding: 20px;
+width: 360px;
+height: 180px;
+text-align: center;
 }
 .upload-area:hover {
-  border: 1px dashed #1890ff;
+border: 1px dashed #1890ff;
 }
 .upload-area.is-dragover {
-  border: 2px dashed #1890ff;
-  background-color: #1890ff20;
-}
-</style>
+border: 2px dashed #1890ff;
+background-color: #1890ff20;
+} -->
