@@ -20,6 +20,7 @@
         <a-layout style="padding: 0 24px 24px">
           <a-layout-content class="preview-container">
             <p>画布区域</p>
+            <hello-test></hello-test>
             <div class="preview-list" id="canvas-area">
               <!-- <div v-for="component in components" :key="component.id">
                 {{ component.props.text }}
