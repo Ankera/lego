@@ -6,13 +6,13 @@
   <div>{{ obj }}</div>
   <button @click="updateParams">修改</button>
   <div>{{name}} --- {{age}}</div>
+  <hr>
+  <Computed />
 </template>
 
 <script setup lang="ts">
 import { ref, reactive, customRef, toRef } from "vue";
-const demo = ref<number>(1);
-
-console.log("demo=", demo);
+import Computed from './computed.vue'
 
 function MyRef<T>(value: T) {
   let timer: any;
@@ -46,7 +46,7 @@ const updateParams = () => {
 };
 
 const toRefs = <T extends object>(object: T) => {
-  const map = {};
+  const map: any= {};
   for (const key in object) {
     map[key] = toRef(object, key);
   }

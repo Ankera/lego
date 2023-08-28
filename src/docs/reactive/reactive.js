@@ -1,7 +1,6 @@
 import { tarck, trigger } from "./effect.js";
 const isObject = (obj) => obj !== null && typeof obj === "object";
 export const reactive = (target) => {
-    
     return new Proxy(target, {
         get(target, key, receiver) {
             const res = Reflect.get(target, key, receiver);

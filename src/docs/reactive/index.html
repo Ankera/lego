@@ -12,8 +12,9 @@
 <script type="module">
     import { reactive } from './reactive.js'
     import { effect } from './effect.js'
+    import { computed } from './computed.js'
 
-    const user = reactive({
+    window.a = reactive({
         name: "Tom",
         age: 12,
         obj: {
@@ -21,18 +22,23 @@
         }
     })
 
-    effect(() => {
-        const app = document.getElementById('app')
+    // effect(() => {
+    //     const app = document.getElementById('app')
 
-        app.innerText = `${user.name} ---- ${user.age} `
+    //     app.innerText = `${user.name} ---- ${user.age} `
+    // })
+
+    // setTimeout(() => {
+    //     user.name = "xxxxx"
+
+    //     // setTimeout(() => {
+    //     //     user.obj.type = "YYYYY"
+    //     // }, 1000)
+    // }, 2000);
+
+    window.b = computed(() => {
+        console.log('重新计算')
+        return a.age + 11
     })
-
-    setTimeout(() => {
-        user.name = "xxxxx"
-
-        // setTimeout(() => {
-        //     user.obj.type = "YYYYY"
-        // }, 1000)
-    }, 2000);
 </script>
 </html>
