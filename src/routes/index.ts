@@ -3,6 +3,7 @@ import Editor from '../views/Editor.vue'
 import Home from '../views/Home.vue'
 import TemplateDetail from '../views/TemplateDetail.vue'
 import Index from '../views/Index.vue';
+import Docs from '../docs/index.vue'
 
 const router = createRouter({
     history: createWebHistory(),
@@ -48,6 +49,11 @@ const router = createRouter({
         //         withHeader: true
         //     }
         // }
+        {
+            path: '/docs',
+            name: 'docs',
+            component: Docs
+        }
     ]
 })
 
