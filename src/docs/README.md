@@ -1,19 +1,9 @@
-<!-- 作者: 余亚勇 -->
-<!-- 创建时间: 2023-08-28 13:06:08 -->
-<!-- 模块主要作用:  -->
+#### Vue3 学习总结
 
-<template>
-  <div>{{ obj }}</div>
-  <button @click="updateParams">修改</button>
-  <div>{{name}} --- {{age}}</div>
-</template>
+#### 1、customRef
 
-<script setup lang="ts">
-import { ref, reactive, customRef, toRef } from "vue";
-const demo = ref<number>(1);
-
-console.log("demo=", demo);
-
+```typescript
+// 类似防抖
 function MyRef<T>(value: T) {
   let timer: any;
   return customRef((track, trigger) => {
@@ -38,12 +28,18 @@ function MyRef<T>(value: T) {
 }
 
 const obj = MyRef<string>("这是Myref");
+// chrome 浏览器 设置 -  Console - Enable custom formatters
+console.log('obj', obj) //打印 demo= Ref<1>
+```
 
-const updateParams = () => {
-  obj.value = "这是修改后的";
 
-  console.log("obj", obj);
-};
+
+#### 2、toRef & toRefs
+
+```typescript
+// 取出响应式对象中的一个值
+const man = reactive({name: "Tom", age: 12})
+const age = toRef(man, 'age')
 
 const toRefs = <T extends object>(object: T) => {
   const map = {};
@@ -53,9 +49,6 @@ const toRefs = <T extends object>(object: T) => {
   return map;
 };
 
-const man = reactive({name: "Tom", age: 12})
+const { name, age } = toRefs(man)
+```
 
-const { name, age } = toRefs(man);
-</script>
-
-<style scoped></style>

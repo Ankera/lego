@@ -1,60 +1,60 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import Editor from '../views/Editor.vue'
-import Home from '../views/Home.vue'
-import TemplateDetail from '../views/TemplateDetail.vue'
-import Index from '../views/Index.vue';
-import Docs from '../docs/index.vue'
+import { createRouter, createWebHistory } from "vue-router";
+import Editor from "../views/Editor.vue";
+import Home from "../views/Home.vue";
+import TemplateDetail from "../views/TemplateDetail.vue";
+import Index from "../views/Index.vue";
+import Docs from "../docs/index.vue";
 
 const router = createRouter({
-    history: createWebHistory(),
-    routes: [
+  history: createWebHistory(),
+  routes: [
+    {
+      path: "/",
+      name: "index",
+      component: Index,
+      children: [
         {
-            path: '/',
-            name: 'index',
-            component: Index,
-            children: [
-                {
-                    path: '',
-                    name: 'home',
-                    component: Home,
-                },
-                {
-                    path: 'template/:id',
-                    name: 'template',
-                    component: TemplateDetail,
-                    meta: {
-                        withHeader: true
-                    }
-                }
-            ]
+          path: "",
+          name: "home",
+          component: Home,
         },
-        // {
-        //     path: '/',
-        //     name: 'home',
-        //     component: Home,
-        //     meta: {
-        //         withHeader: true
-        //     }
-        // },
         {
-            path: '/editor',
-            name: 'editor',
-            component: Editor
+          path: "template/:id",
+          name: "template",
+          component: TemplateDetail,
+          meta: {
+            withHeader: true,
+          },
         },
-        // {
-        //     path: '/template/:id',
-        //     name: 'template',
-        //     component: TemplateDetail,
-        //     meta: {
-        //         withHeader: true
-        //     }
-        // }
-        {
-            path: '/docs',
-            name: 'docs',
-            component: Docs
-        }
-    ]
-})
+      ],
+    },
+    // {
+    //     path: '/',
+    //     name: 'home',
+    //     component: Home,
+    //     meta: {
+    //         withHeader: true
+    //     }
+    // },
+    {
+      path: "/editor",
+      name: "editor",
+      component: Editor,
+    },
+    // {
+    //     path: '/template/:id',
+    //     name: 'template',
+    //     component: TemplateDetail,
+    //     meta: {
+    //         withHeader: true
+    //     }
+    // }
+    {
+      path: "/docs",
+      name: "docs",
+      component: Docs,
+    },
+  ],
+});
 
 export default router;
