@@ -8,11 +8,13 @@
   <div>{{name}} --- {{age}}</div>
   <hr>
   <Computed />
+  <BemIndex />
 </template>
 
 <script setup lang="ts">
 import { ref, reactive, customRef, toRef } from "vue";
 import Computed from './computed.vue'
+import BemIndex from './bem/index.vue'
 
 function MyRef<T>(value: T) {
   let timer: any;

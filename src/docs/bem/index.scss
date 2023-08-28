@@ -1,0 +1,39 @@
+$namespace: "xm" !default;
+$block-sel: "-" !default;
+$elem-sel: "__" !default;
+$mod-sel: "--" !default;
+
+// xm-input
+@mixin b($block) {
+  $B: #{$namespace + $block-sel + $block};
+  @at-root {
+    .#{$B} {
+      @content;
+    }
+  }
+}
+
+// xm-input__inner
+@mixin e($el) {
+  $selector: &;
+  @at-root {
+    #{$selector + $elem-sel + $el} {
+      @content;
+    }
+  }
+}
+
+@mixin m($m) {
+  $selector: &;
+  @at-root {
+    #{$selector + $mod-sel + $m} {
+      @content;
+    }
+  }
+}
+
+@mixin bfc {
+  height: 100%;
+  overflow: hidden;
+  border: 1px solid red;
+}

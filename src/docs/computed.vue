@@ -4,12 +4,19 @@
 
 <template>
   <div>
-    Computed
+    
   </div>
 </template>
 
 <script setup lang='ts'>
+import { getCurrentInstance, onBeforeMount } from 'vue';
+const ins = getCurrentInstance();
 
+console.log('ins', ins)
+
+onBeforeMount(() => {
+  console.log('onBeforeMount')
+})
 </script>
 
 <style scoped>
