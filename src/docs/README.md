@@ -55,3 +55,72 @@ const { name, age } = toRefs(man)
 
 
 #### 3、bem架构规范
+
+#### 4.1、父组件给子组件传值
+
+```typescript
+import { defineProps, withDefaults } from "vue";
+
+interface DProps {
+  title: string;
+  num: number[];
+}
+
+const props = withDefaults(defineProps<DProps>(), {
+  // 给默认值
+  title: "zs",
+  num: () => [12, 13, 14], // 复杂数据类型使用函数方式
+});
+
+```
+
+
+
+#### 4.2、子组件给父组件传值
+
+```typescript
+<button @click="send">+</button>
+
+interface EmitProps {
+    (e: 'on-item-click', num: number, name: string): void;
+}
+const emit = defineEmits<EmitProps>()
+
+// 等价于 const emit = defineEmits(['on-item-click'])
+
+const send = () => {
+    emit('on-item-click', 1, 'aaa')
+}
+```
+
+
+
+#### 4.3、子组件暴露给父组件
+
+```vue
+// ---- 子组件 ---- 
+<template></template>
+<script setup lang="ts">
+import { defineExpose } from "vue";
+defineExpose({
+  name1: "这是暴露的属性",
+  open: () => {
+      console.log('open')
+  }
+});
+</script>
+
+// ---- 父组件 ----
+<template></template>
+<script setup lang="ts">
+import { ref } from "vue";
+  
+interface ExposeProps {
+  name: string;
+  open: Function;
+}
+
+const exposeRef = ref<ExposeProps>();
+</script>
+```
+

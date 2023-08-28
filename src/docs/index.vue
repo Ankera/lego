@@ -5,16 +5,20 @@
 <template>
   <div>{{ obj }}</div>
   <button @click="updateParams">修改</button>
-  <div>{{name}} --- {{age}}</div>
-  <hr>
+  <div>{{ name }} --- {{ age }}</div>
+  <hr />
+  <div>组件之间传值</div>
+  <CZTest01 ref="ts01Ref" :title="'parent'" @onItemClick="onItemClick" />
+  <hr />
   <Computed />
   <BemIndex />
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, customRef, toRef } from "vue";
-import Computed from './computed.vue'
-import BemIndex from './bem/index.vue'
+import { ref, reactive, customRef, toRef, onMounted } from "vue";
+import Computed from "./computed.vue";
+import BemIndex from "./bem/index.vue";
+import CZTest01 from "./chuan_zhi/Test01.vue";
 
 function MyRef<T>(value: T) {
   let timer: any;
@@ -48,16 +52,31 @@ const updateParams = () => {
 };
 
 const toRefs = <T extends object>(object: T) => {
-  const map: any= {};
+  const map: any = {};
   for (const key in object) {
     map[key] = toRef(object, key);
   }
   return map;
 };
 
-const man = reactive({name: "Tom", age: 12})
+const man = reactive({ name: "Tom", age: 12 });
 
 const { name, age } = toRefs(man);
+
+const onItemClick = (a: any, b: any) => {
+  console.log("aa", a, b);
+};
+
+interface Ts01RefProps {
+  name1: string;
+  open: Function;
+}
+
+const ts01Ref = ref<Ts01RefProps>();
+
+onMounted(() => {
+  console.log(1122, ts01Ref.value?.name1)
+});
 </script>
 
 <style scoped></style>
