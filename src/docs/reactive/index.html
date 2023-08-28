@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>reactive</title>
+</head>
+<body>
+    <h1>reactive</h1>
+    <div id="app"></div>
+</body>
+<script type="module">
+    import { reactive } from './reactive.js'
+    import { effect } from './effect.js'
+
+    const user = reactive({
+        name: "Tom",
+        age: 12,
+        obj: {
+            type: 'xxxxxx'
+        }
+    })
+
+    effect(() => {
+        const app = document.getElementById('app')
+
+        app.innerText = `${user.name} ---- ${user.age} `
+    })
+
+    setTimeout(() => {
+        user.name = "xxxxx"
+
+        // setTimeout(() => {
+        //     user.obj.type = "YYYYY"
+        // }, 1000)
+    }, 2000);
+</script>
+</html>
